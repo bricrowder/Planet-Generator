@@ -15,7 +15,7 @@ function love.keypressed(key)
 end
 
 function love.update(dt)
-
+    planet:update(dt)
 end
 
 function love.draw()

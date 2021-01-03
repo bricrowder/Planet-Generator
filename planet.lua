@@ -46,8 +46,10 @@ function planet.new()
     }
     p.pos = {
         base = {
-            x = love.math.random(-(size/2), size/2) * p.cell.width,
-            y = love.math.random(-(size/2), size/2) * p.cell.height,
+            -- x = love.math.random(-(size/2), size/2) * p.cell.width,
+            -- y = love.math.random(-(size/2), size/2) * p.cell.height,
+            x = 0,
+            y = 0
         },
         planet = {
             x = 0,
@@ -140,7 +142,7 @@ function planet:update(dt)
     end
 end
 
-function planet:draw()
+function planet:draw(clouds)
     -- setup circular stencil
     love.graphics.setColor(0.25,0.25,0.25,1)
     love.graphics.stencil(
@@ -157,9 +159,11 @@ function planet:draw()
     love.graphics.draw(self.texture, self.pos.planet.x + self.texture:getWidth(), self.pos.planet.y)
 
     -- draw clouds
-    love.graphics.draw(self.cloudTexture, self.pos.clouds.x, self.pos.clouds.y)
-    love.graphics.draw(self.cloudTexture, self.pos.clouds.x + self.cloudTexture:getWidth(), self.pos.clouds.y)
-
+    if clouds then
+        love.graphics.draw(self.cloudTexture, self.pos.clouds.x, self.pos.clouds.y)
+        love.graphics.draw(self.cloudTexture, self.pos.clouds.x + self.cloudTexture:getWidth(), self.pos.clouds.y)
+    end
+    
     -- reset stencil
     love.graphics.setStencilTest()  
     love.graphics.setColor(1,1,1,1)
